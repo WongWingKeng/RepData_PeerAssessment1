@@ -91,7 +91,7 @@ mean_tot1
 ## [1] 10766.19
 ```
 
-The mean of the total number of steps taken per day (excluding missing values) is 1.0766189\times 10^{4} which corresponds to the histogram's highest frequencies step range of between 10000 and 15000.
+The mean of the total number of steps taken per day (excluding missing values) is 10766.19 which corresponds to the histogram's highest frequencies step range of between 10000 and 15000.
 
 
 ```r
@@ -143,7 +143,7 @@ max_interval
 ## 104      835 206.1698
 ```
 
-The highest number of average steps is recorded at interval 835 minutes with average steps count of 206.1698113.
+The highest number of average steps is recorded at interval 835 minutes with average steps count of 206.1698.
 
 ---
 
@@ -176,7 +176,7 @@ percent
 ```
 This represent around 13% of the total data row sets which may not necessary influences too much on the overall result.
 
-In order to test this hypothesis therefore we need to attempt to impute the missing values and determine differences to the previous mean median estimates.
+In order to test this hypothesis therefore we need to attempt to impute the missing values and determine differences to the previous mean and median estimates.
 
 The strategy chosen herewith is to substitute all missing values with the mean steps value for each interval.
 
@@ -225,7 +225,7 @@ meansteps_to_fill<-tapply(activity.filled$steps, activity.filled$interval, mean,
 activity.filled$steps[NA_index]<-meansteps_to_fill[as.character(activity.filled$interval[NA_index])]
 ```
 
-Sample result of imputed dataset whereby missing value of the correspoding interval are replaced.
+Sample result of imputed dataset whereby missing value of the correspoding interval is replaced.
 
 ```r
 head(activity.filled)
@@ -282,7 +282,7 @@ mean_tot2
 ## [1] 10766.19
 ```
 
-New mean is 1.0766189\times 10^{4} which falls into the histogram's 10000-15000 steps range with highest frequencies.
+New mean is 10766.19 which falls into the histogram's 10000-15000 steps range with highest frequencies.
 
 
 ```r
@@ -294,7 +294,7 @@ median_tot2
 ## [1] 10766.19
 ```
 
-New median is 1.0766189\times 10^{4} which also falls into the middle level of the histogram's complete total step ranges (in the middle of the X-axis).
+New median is 10766.19 which also falls into the middle level of the histogram's complete total step ranges (in the middle of the X-axis).
 
 Compared to the mean and median of the original dataset with missing values
 
@@ -321,7 +321,9 @@ median_tot1
 
 The new mean and median values have not differ much from the original mean and median estimates. 
 
-This is mainly due to the missing 2304 rows  were replaced with means step count value which fills in mostly into the middle range of the datasets (use the histogram to visualize this, the increases in the number of frequencies for step ranges 10000-15000). Hence mean value should not change. As for the median value since again the missing values  replaced with mean steps count value would be slotted mostly in the middle level when the total step counts is sorted hence the median would not have differ much as well. 
+This is mainly due to the missing 2304 rows  were replaced with means step count value. These values fills in mostly into the middle range of the dataset. (Use the histogram to visualize this, the increases in the number of frequencies for step ranges 10000-15000). Hence mean value remains the same. 
+
+As for the median value since the missing values were replaced with mean steps count values. When the entire step count ranges is sorted from lowest to highest, the replaced values will most likely be inserted  in the middle level. Hence the median value will not have differ too much as well when compared to the previous median estimate. 
 
 The imputation of the missing data has therefore has not caused any significant changes to the estimates on total daily steps.
 
@@ -389,14 +391,15 @@ From the graph itself, the overall weekend and weekday activity pattern are not 
 
 One can probably draw some assumptions based on the graph:  
 
-* Between interval 0 till 500 minutes, the average steps recorded for both weekend and weekday set are relatively low. This could be due to when the test subject was sleeping. 
+* Between interval 0 till 500 minutes, the average steps recorded for both weekend and weekday are relatively low. This could be due to when the test subject was sleeping. 
 
 * From minute interval 500  minutes onwards, the activity pattern differs:  
 
-    * For weekday, there is a max spike at minute interval 835. This could be when the test subject is walking/going to work. Then it follows by some overall lower activity trends. This could be when the test subject is stationary/ sitting down and working. Hence activity recorded during this period is lower.
-
-    * For weekend, after the low activity period between 0 till 500 minutes interval. The overall activity trend throughout the recording period are relatively higher when compared to the weekday pattern. This could be due to the test subject is constantly moving about during the weekend but still keeping to non-hectic activities.
-    
+    * For weekday, there is a max spike at minute interval 835. This could be when the test subject is walking/going to work. Then it follows by some overall lower activity trend. This could be when the test subject is stationary/ sitting down and working. Hence steps count recorded during this period is lower.
+  
+    * For weekend, after the low activity period between 0 till 500 minutes interval. The overall activity trend throughout the recording period is relatively higher (with the exception of the weekday's peak during the beginning period) when compared to the weekday pattern. This could be due to the test subject is constantly moving about during the weekend.
+  
+  
   
   
   
